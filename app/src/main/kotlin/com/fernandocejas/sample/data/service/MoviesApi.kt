@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.movies
+package com.fernandocejas.sample.data.service
 
-import android.content.Context
-import android.content.Intent
-import com.fernandocejas.sample.core.platform.BaseActivity
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-class MoviesActivity : BaseActivity() {
-
+internal interface MoviesApi {
     companion object {
-        fun callingIntent(context: Context) = Intent(context, MoviesActivity::class.java)
+        private const val PARAM_MOVIE_ID = "movieId"
+        private const val MOVIES = "movies.json"
+        private const val MOVIE_DETAILS = "movie_0{$PARAM_MOVIE_ID}.json"
     }
 
-    override fun fragment() = MoviesFragment()
+    @GET(MOVIES) fun movies(): Call<List<MovieEntity>>
+    @GET(MOVIE_DETAILS) fun movieDetails(@Path(PARAM_MOVIE_ID) movieId: Int): Call<MovieDetailsEntity>
 }

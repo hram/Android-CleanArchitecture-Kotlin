@@ -13,19 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.movies
+package com.fernandocejas.sample.domain
 
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import com.fernandocejas.sample.domain.GetMovieDetails.Params
+import com.fernandocejas.sample.core.interactor.UseCase
+import javax.inject.Inject
 
-internal interface MoviesApi {
-    companion object {
-        private const val PARAM_MOVIE_ID = "movieId"
-        private const val MOVIES = "movies.json"
-        private const val MOVIE_DETAILS = "movie_0{$PARAM_MOVIE_ID}.json"
-    }
+class GetMovieDetails
+@Inject constructor(private val moviesRepository: MoviesRepository) : UseCase<MovieDetails, Params>() {
 
-    @GET(MOVIES) fun movies(): Call<List<MovieEntity>>
-    @GET(MOVIE_DETAILS) fun movieDetails(@Path(PARAM_MOVIE_ID) movieId: Int): Call<MovieDetailsEntity>
+    override suspend fun run(params: Params) = moviesRepository.movieDetails(params.id)
+
+    data class Params(val id: Int)
 }

@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.movies
+package com.fernandocejas.sample.ui.features.movies.list
 
-import com.fernandocejas.sample.features.movies.GetMovieDetails.Params
-import com.fernandocejas.sample.core.interactor.UseCase
-import javax.inject.Inject
+import android.os.Parcel
+import com.fernandocejas.sample.core.platform.KParcelable
+import com.fernandocejas.sample.core.platform.parcelableCreator
 
-class GetMovieDetails
-@Inject constructor(private val moviesRepository: MoviesRepository) : UseCase<MovieDetails, Params>() {
+data class MovieView(val id: Int, val poster: String) : KParcelable {
+    companion object {
+        @JvmField val CREATOR = parcelableCreator(::MovieView)
+    }
 
-    override suspend fun run(params: Params) = moviesRepository.movieDetails(params.id)
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
 
-    data class Params(val id: Int)
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        with(dest) {
+            writeInt(id)
+            writeString(poster)
+        }
+    }
 }

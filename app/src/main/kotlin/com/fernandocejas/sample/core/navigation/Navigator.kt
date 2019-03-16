@@ -23,11 +23,11 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import android.widget.ImageView
-import com.fernandocejas.sample.features.login.Authenticator
-import com.fernandocejas.sample.features.login.LoginActivity
-import com.fernandocejas.sample.features.movies.MovieDetailsActivity
-import com.fernandocejas.sample.features.movies.MovieView
-import com.fernandocejas.sample.features.movies.MoviesActivity
+import com.fernandocejas.sample.ui.features.login.Authenticator
+import com.fernandocejas.sample.ui.features.login.LoginActivity
+import com.fernandocejas.sample.ui.features.movies.details.MovieDetailsActivity
+import com.fernandocejas.sample.ui.features.movies.list.MovieView
+import com.fernandocejas.sample.ui.features.movies.list.MoviesActivity
 import com.fernandocejas.sample.core.extension.empty
 import javax.inject.Inject
 import javax.inject.Singleton

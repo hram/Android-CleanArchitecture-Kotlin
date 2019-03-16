@@ -13,11 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.login
+package com.fernandocejas.sample.data.service
 
-import com.fernandocejas.sample.core.platform.BaseFragment
-import com.fernandocejas.sample.R
+import retrofit2.Retrofit
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LoginFragment : BaseFragment() {
-    override fun layoutId() = R.layout.fragment_login
+@Singleton
+class MoviesService
+@Inject constructor(retrofit: Retrofit) : MoviesApi {
+    private val moviesApi by lazy { retrofit.create(MoviesApi::class.java) }
+
+    override fun movies() = moviesApi.movies()
+    override fun movieDetails(movieId: Int) = moviesApi.movieDetails(movieId)
 }

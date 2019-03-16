@@ -17,10 +17,13 @@ package com.fernandocejas.sample.features.movies
 
 import com.fernandocejas.sample.UnitTest
 import com.fernandocejas.sample.core.functional.Either.Right
+import com.fernandocejas.sample.domain.GetMovieDetails
+import com.fernandocejas.sample.domain.MovieDetails
+import com.fernandocejas.sample.domain.MoviesRepository
 import com.nhaarman.mockito_kotlin.given
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

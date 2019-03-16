@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.movies
+package com.fernandocejas.sample.ui.features.login
 
-import com.fernandocejas.sample.core.extension.empty
+import android.content.Context
+import android.content.Intent
+import com.fernandocejas.sample.core.platform.BaseActivity
 
-data class MovieDetails(val id: Int,
-                        val title: String,
-                        val poster: String,
-                        val summary: String,
-                        val cast: String,
-                        val director: String,
-                        val year: Int,
-                        val trailer: String) {
-
+class LoginActivity : BaseActivity() {
     companion object {
-        fun empty() = MovieDetails(0, String.empty(), String.empty(), String.empty(),
-                String.empty(), String.empty(), 0, String.empty())
+        fun callingIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
+
+    override fun fragment() = LoginFragment()
 }
-
-

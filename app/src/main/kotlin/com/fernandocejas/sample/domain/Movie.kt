@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.login
+package com.fernandocejas.sample.domain
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.fernandocejas.sample.core.extension.empty
 
-@Singleton
-class Authenticator
-@Inject constructor(){
-    //Learning purpose: We assume the user is always logged in
-    //Here you should put your own logic to return whether the user
-    //is authenticated or not
-    fun userLoggedIn() = true
+data class Movie(val id: Int, val poster: String) {
+
+    companion object {
+        fun empty() = Movie(0, String.empty())
+    }
 }

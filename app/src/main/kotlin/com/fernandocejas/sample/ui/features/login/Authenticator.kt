@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.features.movies
+package com.fernandocejas.sample.ui.features.login
 
-import android.os.Parcel
-import com.fernandocejas.sample.core.platform.KParcelable
-import com.fernandocejas.sample.core.platform.parcelableCreator
+import javax.inject.Inject
+import javax.inject.Singleton
 
-data class MovieView(val id: Int, val poster: String) : KParcelable {
-    companion object {
-        @JvmField val CREATOR = parcelableCreator(::MovieView)
-    }
-
-    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        with(dest) {
-            writeInt(id)
-            writeString(poster)
-        }
-    }
+@Singleton
+class Authenticator
+@Inject constructor(){
+    //Learning purpose: We assume the user is always logged in
+    //Here you should put your own logic to return whether the user
+    //is authenticated or not
+    fun userLoggedIn() = true
 }

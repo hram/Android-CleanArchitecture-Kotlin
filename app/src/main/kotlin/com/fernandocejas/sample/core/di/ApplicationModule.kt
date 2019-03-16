@@ -18,7 +18,8 @@ package com.fernandocejas.sample.core.di
 import android.content.Context
 import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.BuildConfig
-import com.fernandocejas.sample.features.movies.MoviesRepository
+import com.fernandocejas.sample.domain.MoviesRepository
+import com.fernandocejas.sample.data.MoviesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -30,9 +31,13 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val application: AndroidApplication) {
 
-    @Provides @Singleton fun provideApplicationContext(): Context = application
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context = application
 
-    @Provides @Singleton fun provideRetrofit(): Retrofit {
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl("https://raw.githubusercontent.com/android10/Sample-Data/master/Android-CleanArchitecture-Kotlin/")
                 .client(createClient())
@@ -49,5 +54,7 @@ class ApplicationModule(private val application: AndroidApplication) {
         return okHttpClientBuilder.build()
     }
 
-    @Provides @Singleton fun provideMoviesRepository(dataSource: MoviesRepository.Network): MoviesRepository = dataSource
+    @Provides
+    @Singleton
+    fun provideMoviesRepository(dataSource: MoviesRepositoryImpl): MoviesRepository = dataSource
 }
