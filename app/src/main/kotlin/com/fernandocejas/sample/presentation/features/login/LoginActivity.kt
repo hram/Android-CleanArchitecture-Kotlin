@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.movies.details
+package com.fernandocejas.sample.presentation.features.login
 
-data class MovieDetailsView(
-    val id: Int,
-    val title: String,
-    val poster: String,
-    val summary: String,
-    val cast: String,
-    val director: String,
-    val year: Int,
-    val trailer: String
-)
+import android.content.Context
+import android.content.Intent
+import com.fernandocejas.sample.core.platform.BaseActivity
+
+class LoginActivity : BaseActivity() {
+    companion object {
+        fun callingIntent(context: Context) = Intent(context, LoginActivity::class.java)
+    }
+
+    override fun fragment() = LoginFragment()
+}

@@ -17,8 +17,8 @@ package com.fernandocejas.sample.core.di.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.fernandocejas.sample.ui.features.movies.details.MovieDetailsViewModel
-import com.fernandocejas.sample.ui.features.movies.list.MoviesViewModel
+import com.fernandocejas.sample.presentation.features.movies.details.MovieDetailsViewModel
+import com.fernandocejas.sample.presentation.features.movies.list.MoviesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

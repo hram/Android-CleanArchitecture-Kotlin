@@ -16,7 +16,7 @@
 package com.fernandocejas.sample.features.login
 
 import com.fernandocejas.sample.UnitTest
-import com.fernandocejas.sample.ui.features.login.Authenticator
+import com.fernandocejas.sample.presentation.features.login.Authenticator
 import org.amshove.kluent.shouldBe
 import org.junit.Test
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.movies.details
+package com.fernandocejas.sample.presentation.features.movies.details
 
 import android.support.v4.app.FragmentActivity
 import android.support.v4.view.animation.FastOutSlowInInterpolator

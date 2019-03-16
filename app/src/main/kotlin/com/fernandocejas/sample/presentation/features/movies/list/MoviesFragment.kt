@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.movies.list
+package com.fernandocejas.sample.presentation.features.movies.list
 
 import android.os.Bundle
 import android.support.annotation.StringRes
@@ -21,7 +21,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import com.fernandocejas.sample.core.platform.BaseFragment
 import com.fernandocejas.sample.R
-import com.fernandocejas.sample.ui.features.movies.MovieFailure.ListNotAvailable
+import com.fernandocejas.sample.presentation.features.movies.MovieFailure.ListNotAvailable
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.exception.Failure.NetworkConnection
 import com.fernandocejas.sample.core.exception.Failure.ServerError

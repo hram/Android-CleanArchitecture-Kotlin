@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.login
+package com.fernandocejas.sample.presentation.features.movies.details
 
-import javax.inject.Inject
-import javax.inject.Singleton
-
-@Singleton
-class Authenticator
-@Inject constructor() {
-    // Learning purpose: We assume the user is always logged in
-    // Here you should put your own logic to return whether the user
-    // is authenticated or not
-    fun userLoggedIn() = true
-}
+data class MovieDetailsView(
+    val id: Int,
+    val title: String,
+    val poster: String,
+    val summary: String,
+    val cast: String,
+    val director: String,
+    val year: Int,
+    val trailer: String
+)

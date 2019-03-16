@@ -13,11 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.login
+package com.fernandocejas.sample.presentation.features.movies.list
 
-import com.fernandocejas.sample.core.platform.BaseFragment
-import com.fernandocejas.sample.R
+import android.os.Parcel
+import com.fernandocejas.sample.core.platform.KParcelable
+import com.fernandocejas.sample.core.platform.parcelableCreator
 
-class LoginFragment : BaseFragment() {
-    override fun layoutId() = R.layout.fragment_login
+data class MovieView(val id: Int, val poster: String) : KParcelable {
+    companion object {
+        @JvmField val CREATOR = parcelableCreator(::MovieView)
+    }
+
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        with(dest) {
+            writeInt(id)
+            writeString(poster)
+        }
+    }
 }

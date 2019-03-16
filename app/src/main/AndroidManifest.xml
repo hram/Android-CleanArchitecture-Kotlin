@@ -29,17 +29,17 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     </activity>
 
     <activity
-        android:name=".ui.features.login.LoginActivity"
+        android:name=".presentation.features.login.LoginActivity"
         android:label="@string/login_screen_title">
     </activity>
 
     <activity
-        android:name=".ui.features.movies.list.MoviesActivity"
+        android:name=".presentation.features.movies.list.MoviesActivity"
         android:label="@string/movies_screen_title">
     </activity>
 
     <activity
-        android:name=".ui.features.movies.details.MovieDetailsActivity"
+        android:name=".presentation.features.movies.details.MovieDetailsActivity"
         android:label="@string/movie_details_screen_title"
         android:theme="@style/AppTheme.Translucent">
     </activity>

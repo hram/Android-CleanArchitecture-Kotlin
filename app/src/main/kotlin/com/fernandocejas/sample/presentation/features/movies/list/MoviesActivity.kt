@@ -13,23 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.movies.list
+package com.fernandocejas.sample.presentation.features.movies.list
 
-import android.os.Parcel
-import com.fernandocejas.sample.core.platform.KParcelable
-import com.fernandocejas.sample.core.platform.parcelableCreator
+import android.content.Context
+import android.content.Intent
+import com.fernandocejas.sample.core.platform.BaseActivity
 
-data class MovieView(val id: Int, val poster: String) : KParcelable {
+class MoviesActivity : BaseActivity() {
+
     companion object {
-        @JvmField val CREATOR = parcelableCreator(::MovieView)
+        fun callingIntent(context: Context) = Intent(context, MoviesActivity::class.java)
     }
 
-    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        with(dest) {
-            writeInt(id)
-            writeString(poster)
-        }
-    }
+    override fun fragment() = MoviesFragment()
 }

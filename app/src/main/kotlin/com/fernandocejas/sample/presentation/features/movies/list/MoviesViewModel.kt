@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.movies.list
+package com.fernandocejas.sample.presentation.features.movies.list
 
 import android.arch.lifecycle.MutableLiveData
 import com.fernandocejas.sample.core.interactor.UseCase.None

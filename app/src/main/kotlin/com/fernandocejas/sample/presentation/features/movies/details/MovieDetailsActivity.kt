@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.sample.ui.features.movies.details
+package com.fernandocejas.sample.presentation.features.movies.details
 
 import android.content.Context
 import android.content.Intent
 import com.fernandocejas.sample.core.platform.BaseActivity
-import com.fernandocejas.sample.ui.features.movies.list.MovieView
+import com.fernandocejas.sample.presentation.features.movies.list.MovieView
 
 class MovieDetailsActivity : BaseActivity() {
 
