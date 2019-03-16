@@ -22,7 +22,6 @@ import kotlinx.coroutines.android.UI
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-
 /**
  * Abstract class for a Use Case (Interactor in terms of Clean Architecture).
  * This abstraction represents an execution unit for different use cases (this means than any use

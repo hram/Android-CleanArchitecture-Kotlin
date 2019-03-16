@@ -32,7 +32,6 @@ import com.fernandocejas.sample.core.extension.empty
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 @Singleton
 class Navigator
 @Inject constructor(private val authenticator: Authenticator) {
@@ -85,5 +84,3 @@ class Navigator
 
     class Extras(val transitionSharedElement: View)
 }
-
-

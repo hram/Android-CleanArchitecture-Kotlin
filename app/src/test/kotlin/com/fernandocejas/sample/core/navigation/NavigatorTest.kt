@@ -26,7 +26,6 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 
-
 class NavigatorTest : AndroidTest() {
 
     private lateinit var navigator: Navigator

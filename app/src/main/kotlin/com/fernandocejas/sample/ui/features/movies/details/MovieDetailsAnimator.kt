@@ -24,7 +24,6 @@ import android.view.ViewGroup
 import com.fernandocejas.sample.core.extension.cancelTransition
 import javax.inject.Inject
 
-
 class MovieDetailsAnimator
 @Inject constructor() {
 
@@ -64,5 +63,3 @@ class MovieDetailsAnimator
         view.visibility = visibility
     }
 }
-
-

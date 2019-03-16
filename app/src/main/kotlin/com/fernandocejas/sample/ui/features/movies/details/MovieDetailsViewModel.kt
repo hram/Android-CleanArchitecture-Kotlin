@@ -24,8 +24,10 @@ import com.fernandocejas.sample.domain.PlayMovie
 import javax.inject.Inject
 
 class MovieDetailsViewModel
-@Inject constructor(private val getMovieDetails: GetMovieDetails,
-                    private val playMovie: PlayMovie) : BaseViewModel() {
+@Inject constructor(
+    private val getMovieDetails: GetMovieDetails,
+    private val playMovie: PlayMovie
+) : BaseViewModel() {
 
     var movieDetails: MutableLiveData<MovieDetailsView> = MutableLiveData()
 

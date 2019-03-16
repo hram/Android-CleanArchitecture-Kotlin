@@ -33,4 +33,3 @@ abstract class AcceptanceTest<T : Activity>(clazz: Class<T>) {
     val checkThat: Matchers = Matchers()
     val events: Events = Events()
 }
-

@@ -53,7 +53,7 @@ fun ImageView.loadUrlAndPostponeEnterTransition(url: String, activity: FragmentA
     Glide.with(context.applicationContext).load(url).into(target)
 }
 
-private class ImageViewBaseTarget (var imageView: ImageView?, var activity: FragmentActivity?) : BaseTarget<Drawable>() {
+private class ImageViewBaseTarget(var imageView: ImageView?, var activity: FragmentActivity?) : BaseTarget<Drawable>() {
     override fun removeCallback(cb: SizeReadyCallback?) {
         imageView = null
         activity = null

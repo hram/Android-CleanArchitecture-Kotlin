@@ -60,7 +60,6 @@ class MoviesFragment : BaseFragment() {
         loadMoviesList()
     }
 
-
     private fun initializeView() {
         movieList.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         movieList.adapter = moviesAdapter
