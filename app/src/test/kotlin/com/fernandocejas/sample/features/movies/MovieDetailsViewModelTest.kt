@@ -36,6 +36,7 @@ class MovieDetailsViewModelTest : AndroidTest() {
 
     @Mock
     private lateinit var getMovieDetails: GetMovieDetails
+
     @Mock
     private lateinit var playMovie: PlayMovie
 

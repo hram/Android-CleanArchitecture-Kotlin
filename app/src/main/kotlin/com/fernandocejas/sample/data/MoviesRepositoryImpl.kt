@@ -9,10 +9,8 @@ import com.fernandocejas.sample.domain.Movie
 import com.fernandocejas.sample.domain.MoviesRepository
 import com.fernandocejas.sample.data.service.MoviesService
 import retrofit2.Call
-import javax.inject.Inject
 
-class MoviesRepositoryImpl
-@Inject constructor(private val networkHandler: NetworkHandler, private val service: MoviesService) : MoviesRepository {
+class MoviesRepositoryImpl constructor(private val networkHandler: NetworkHandler, private val service: MoviesService) : MoviesRepository {
 
     override fun movies(): Either<Failure, List<Movie>> {
         return when (networkHandler.isConnected) {

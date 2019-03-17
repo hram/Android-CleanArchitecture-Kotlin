@@ -19,36 +19,35 @@ import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
-import com.fernandocejas.sample.core.platform.BaseFragment
 import com.fernandocejas.sample.R
-import com.fernandocejas.sample.presentation.features.movies.MovieFailure.ListNotAvailable
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.exception.Failure.NetworkConnection
 import com.fernandocejas.sample.core.exception.Failure.ServerError
 import com.fernandocejas.sample.core.extension.failure
 import com.fernandocejas.sample.core.extension.invisible
 import com.fernandocejas.sample.core.extension.observe
-import com.fernandocejas.sample.core.extension.viewModel
 import com.fernandocejas.sample.core.extension.visible
 import com.fernandocejas.sample.core.navigation.Navigator
-import kotlinx.android.synthetic.main.fragment_movies.emptyView
-import kotlinx.android.synthetic.main.fragment_movies.movieList
-import javax.inject.Inject
+import com.fernandocejas.sample.core.platform.BaseFragment
+import com.fernandocejas.sample.presentation.features.movies.MovieFailure.ListNotAvailable
+import kotlinx.android.synthetic.main.fragment_movies.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MoviesFragment : BaseFragment() {
 
-    @Inject lateinit var navigator: Navigator
-    @Inject lateinit var moviesAdapter: MoviesAdapter
+    val navigator: Navigator by inject()
 
-    private lateinit var moviesViewModel: MoviesViewModel
+    val moviesAdapter: MoviesAdapter by inject()
+
+    val moviesViewModel: MoviesViewModel by viewModel()
 
     override fun layoutId() = R.layout.fragment_movies
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
 
-        moviesViewModel = viewModel(viewModelFactory) {
+        moviesViewModel.apply {
             observe(movies, ::renderMoviesList)
             failure(failure, ::handleFailure)
         }
@@ -64,7 +63,8 @@ class MoviesFragment : BaseFragment() {
         movieList.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         movieList.adapter = moviesAdapter
         moviesAdapter.clickListener = { movie, navigationExtras ->
-                    navigator.showMovieDetails(activity!!, movie, navigationExtras) }
+            navigator.showMovieDetails(activity!!, movie, navigationExtras)
+        }
     }
 
     private fun loadMoviesList() {

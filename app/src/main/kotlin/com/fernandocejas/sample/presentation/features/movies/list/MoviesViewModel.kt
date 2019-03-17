@@ -20,10 +20,8 @@ import com.fernandocejas.sample.core.interactor.UseCase.None
 import com.fernandocejas.sample.core.platform.BaseViewModel
 import com.fernandocejas.sample.domain.GetMovies
 import com.fernandocejas.sample.domain.Movie
-import javax.inject.Inject
 
-class MoviesViewModel
-@Inject constructor(private val getMovies: GetMovies) : BaseViewModel() {
+class MoviesViewModel constructor(private val getMovies: GetMovies) : BaseViewModel() {
 
     var movies: MutableLiveData<List<MovieView>> = MutableLiveData()
 

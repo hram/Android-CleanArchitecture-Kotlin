@@ -21,10 +21,8 @@ import com.fernandocejas.sample.core.platform.BaseViewModel
 import com.fernandocejas.sample.domain.GetMovieDetails
 import com.fernandocejas.sample.domain.MovieDetails
 import com.fernandocejas.sample.domain.PlayMovie
-import javax.inject.Inject
 
-class MovieDetailsViewModel
-@Inject constructor(
+class MovieDetailsViewModel constructor(
     private val getMovieDetails: GetMovieDetails,
     private val playMovie: PlayMovie
 ) : BaseViewModel() {

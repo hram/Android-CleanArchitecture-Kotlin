@@ -16,17 +16,15 @@
 package com.fernandocejas.sample.domain
 
 import android.content.Context
-import com.fernandocejas.sample.domain.PlayMovie.Params
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.core.functional.Either.Right
 import com.fernandocejas.sample.core.interactor.UseCase
 import com.fernandocejas.sample.core.interactor.UseCase.None
 import com.fernandocejas.sample.core.navigation.Navigator
-import javax.inject.Inject
+import com.fernandocejas.sample.domain.PlayMovie.Params
 
-class PlayMovie
-@Inject constructor(
+class PlayMovie constructor(
     private val context: Context,
     private val navigator: Navigator
 ) : UseCase<None, Params>() {

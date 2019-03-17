@@ -17,30 +17,23 @@ package com.fernandocejas.sample.presentation.features.movies.details
 
 import android.os.Bundle
 import android.view.View
-import com.fernandocejas.sample.core.platform.BaseFragment
 import com.fernandocejas.sample.R
-import com.fernandocejas.sample.presentation.features.movies.MovieFailure.NonExistentMovie
 import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.exception.Failure.NetworkConnection
 import com.fernandocejas.sample.core.exception.Failure.ServerError
-import com.fernandocejas.sample.core.extension.close
-import com.fernandocejas.sample.core.extension.failure
-import com.fernandocejas.sample.core.extension.isVisible
-import com.fernandocejas.sample.core.extension.loadFromUrl
-import com.fernandocejas.sample.core.extension.loadUrlAndPostponeEnterTransition
 import com.fernandocejas.sample.core.extension.observe
-import com.fernandocejas.sample.core.extension.viewModel
+import com.fernandocejas.sample.core.extension.failure
+import com.fernandocejas.sample.core.extension.loadFromUrl
+import com.fernandocejas.sample.core.extension.isVisible
+import com.fernandocejas.sample.core.extension.loadUrlAndPostponeEnterTransition
+import com.fernandocejas.sample.core.extension.close
+import com.fernandocejas.sample.core.platform.BaseFragment
+import com.fernandocejas.sample.presentation.features.movies.MovieFailure.NonExistentMovie
 import com.fernandocejas.sample.presentation.features.movies.list.MovieView
-import kotlinx.android.synthetic.main.fragment_movie_details.movieCast
-import kotlinx.android.synthetic.main.fragment_movie_details.movieDetails
-import kotlinx.android.synthetic.main.fragment_movie_details.movieDirector
-import kotlinx.android.synthetic.main.fragment_movie_details.moviePlay
-import kotlinx.android.synthetic.main.fragment_movie_details.moviePoster
-import kotlinx.android.synthetic.main.fragment_movie_details.movieSummary
-import kotlinx.android.synthetic.main.fragment_movie_details.movieYear
-import kotlinx.android.synthetic.main.fragment_movie_details.scrollView
-import kotlinx.android.synthetic.main.toolbar.toolbar
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_movie_details.*
+import kotlinx.android.synthetic.main.toolbar.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieDetailsFragment : BaseFragment() {
 
@@ -57,18 +50,17 @@ class MovieDetailsFragment : BaseFragment() {
         }
     }
 
-    @Inject lateinit var movieDetailsAnimator: MovieDetailsAnimator
+    val movieDetailsAnimator: MovieDetailsAnimator by inject()
 
-    private lateinit var movieDetailsViewModel: MovieDetailsViewModel
+    val movieDetailsViewModel: MovieDetailsViewModel by viewModel()
 
     override fun layoutId() = R.layout.fragment_movie_details
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
         activity?.let { movieDetailsAnimator.postponeEnterTransition(it) }
 
-        movieDetailsViewModel = viewModel(viewModelFactory) {
+        movieDetailsViewModel.apply {
             observe(movieDetails, ::renderMovieDetails)
             failure(failure, ::handleFailure)
         }
@@ -113,9 +105,15 @@ class MovieDetailsFragment : BaseFragment() {
 
     private fun handleFailure(failure: Failure?) {
         when (failure) {
-            is NetworkConnection -> { notify(R.string.failure_network_connection); close() }
-            is ServerError -> { notify(R.string.failure_server_error); close() }
-            is NonExistentMovie -> { notify(R.string.failure_movie_non_existent); close() }
+            is NetworkConnection -> {
+                notify(R.string.failure_network_connection); close()
+            }
+            is ServerError -> {
+                notify(R.string.failure_server_error); close()
+            }
+            is NonExistentMovie -> {
+                notify(R.string.failure_movie_non_existent); close()
+            }
         }
     }
 }

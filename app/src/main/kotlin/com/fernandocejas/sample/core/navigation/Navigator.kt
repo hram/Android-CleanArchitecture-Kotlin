@@ -23,18 +23,14 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import android.widget.ImageView
+import com.fernandocejas.sample.core.extension.empty
 import com.fernandocejas.sample.presentation.features.login.Authenticator
 import com.fernandocejas.sample.presentation.features.login.LoginActivity
 import com.fernandocejas.sample.presentation.features.movies.details.MovieDetailsActivity
 import com.fernandocejas.sample.presentation.features.movies.list.MovieView
 import com.fernandocejas.sample.presentation.features.movies.list.MoviesActivity
-import com.fernandocejas.sample.core.extension.empty
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class Navigator
-@Inject constructor(private val authenticator: Authenticator) {
+class Navigator constructor(private val authenticator: Authenticator) {
 
     private fun showLogin(context: Context) = context.startActivity(LoginActivity.callingIntent(context))
 
