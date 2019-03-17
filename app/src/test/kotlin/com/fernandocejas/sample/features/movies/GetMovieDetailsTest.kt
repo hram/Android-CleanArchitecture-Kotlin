@@ -32,17 +32,17 @@ class GetMovieDetailsTest : UnitTest() {
 
     private val MOVIE_ID = 1
 
-    private lateinit var getMovieDetails: GetMovieDetails
+    private lateinit var getMovieDetails: com.fernandocejas.sample.domain.GetMovieDetails
 
-    @Mock private lateinit var moviesRepository: MoviesRepository
+    @Mock private lateinit var moviesRepository: com.fernandocejas.sample.domain.MoviesRepository
 
     @Before fun setUp() {
-        getMovieDetails = GetMovieDetails(moviesRepository)
-        given { moviesRepository.movieDetails(MOVIE_ID) }.willReturn(Right(MovieDetails.empty()))
+        getMovieDetails = com.fernandocejas.sample.domain.GetMovieDetails(moviesRepository)
+        given { moviesRepository.movieDetails(MOVIE_ID) }.willReturn(Right(com.fernandocejas.sample.domain.MovieDetails.empty()))
     }
 
     @Test fun `should get data from repository`() {
-        runBlocking { getMovieDetails.run(GetMovieDetails.Params(MOVIE_ID)) }
+        runBlocking { getMovieDetails.run(com.fernandocejas.sample.domain.GetMovieDetails.Params(MOVIE_ID)) }
 
         verify(moviesRepository).movieDetails(MOVIE_ID)
         verifyNoMoreInteractions(moviesRepository)

@@ -19,15 +19,8 @@ import com.fernandocejas.sample.UnitTest
 import com.fernandocejas.sample.core.exception.Failure.NetworkConnection
 import com.fernandocejas.sample.core.exception.Failure.ServerError
 import com.fernandocejas.sample.core.extension.empty
-import com.fernandocejas.sample.core.functional.Either
 import com.fernandocejas.sample.core.functional.Either.Right
-import com.fernandocejas.sample.core.platform.NetworkHandler
-import com.fernandocejas.sample.domain.MovieDetails
-import com.fernandocejas.sample.data.service.MovieDetailsEntity
-import com.fernandocejas.sample.domain.Movie
-import com.fernandocejas.sample.data.MoviesRepositoryImpl
-import com.fernandocejas.sample.data.service.MovieEntity
-import com.fernandocejas.sample.data.service.MoviesService
+import com.fernandocejas.sample.presentation.NetworkHandler
 import com.nhaarman.mockito_kotlin.given
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyZeroInteractions
@@ -41,25 +34,25 @@ import retrofit2.Response
 
 class MoviesRepositoryTest : UnitTest() {
 
-    private lateinit var networkRepository: MoviesRepositoryImpl
+    private lateinit var networkRepository: com.fernandocejas.sample.data.MoviesRepositoryImpl
 
     @Mock
     private lateinit var networkHandler: NetworkHandler
     @Mock
-    private lateinit var service: MoviesService
+    private lateinit var service: com.fernandocejas.sample.data.service.MoviesService
 
     @Mock
-    private lateinit var moviesCall: Call<List<MovieEntity>>
+    private lateinit var moviesCall: Call<List<com.fernandocejas.sample.data.service.MovieEntity>>
     @Mock
-    private lateinit var moviesResponse: Response<List<MovieEntity>>
+    private lateinit var moviesResponse: Response<List<com.fernandocejas.sample.data.service.MovieEntity>>
     @Mock
-    private lateinit var movieDetailsCall: Call<MovieDetailsEntity>
+    private lateinit var movieDetailsCall: Call<com.fernandocejas.sample.data.service.MovieDetailsEntity>
     @Mock
-    private lateinit var movieDetailsResponse: Response<MovieDetailsEntity>
+    private lateinit var movieDetailsResponse: Response<com.fernandocejas.sample.data.service.MovieDetailsEntity>
 
     @Before
     fun setUp() {
-        networkRepository = MoviesRepositoryImpl(networkHandler, service)
+        networkRepository = com.fernandocejas.sample.data.MoviesRepositoryImpl(networkHandler, service)
     }
 
     @Test
@@ -72,21 +65,21 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movies = networkRepository.movies()
 
-        movies shouldEqual Right(emptyList<Movie>())
+        movies shouldEqual Right(emptyList<com.fernandocejas.sample.domain.Movie>())
         verify(service).movies()
     }
 
     @Test
     fun `should get movie list from service`() {
         given { networkHandler.isConnected }.willReturn(true)
-        given { moviesResponse.body() }.willReturn(listOf(MovieEntity(1, "poster")))
+        given { moviesResponse.body() }.willReturn(listOf(com.fernandocejas.sample.data.service.MovieEntity(1, "poster")))
         given { moviesResponse.isSuccessful }.willReturn(true)
         given { moviesCall.execute() }.willReturn(moviesResponse)
         given { service.movies() }.willReturn(moviesCall)
 
         val movies = networkRepository.movies()
 
-        movies shouldEqual Right(listOf(Movie(1, "poster")))
+        movies shouldEqual Right(listOf(com.fernandocejas.sample.domain.Movie(1, "poster")))
         verify(service).movies()
     }
 
@@ -96,7 +89,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movies = networkRepository.movies()
 
-        movies shouldBeInstanceOf Either::class.java
+        movies shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movies.isLeft shouldEqual true
         movies.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
@@ -108,7 +101,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movies = networkRepository.movies()
 
-        movies shouldBeInstanceOf Either::class.java
+        movies shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movies.isLeft shouldEqual true
         movies.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
@@ -120,7 +113,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movies = networkRepository.movies()
 
-        movies shouldBeInstanceOf Either::class.java
+        movies shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movies.isLeft shouldEqual true
         movies.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
@@ -131,7 +124,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movies = networkRepository.movies()
 
-        movies shouldBeInstanceOf Either::class.java
+        movies shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movies.isLeft shouldEqual true
         movies.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
@@ -146,7 +139,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movieDetails = networkRepository.movieDetails(1)
 
-        movieDetails shouldEqual Right(MovieDetails.empty())
+        movieDetails shouldEqual Right(com.fernandocejas.sample.domain.MovieDetails.empty())
         verify(service).movieDetails(1)
     }
 
@@ -154,7 +147,7 @@ class MoviesRepositoryTest : UnitTest() {
     fun `should get movie details from service`() {
         given { networkHandler.isConnected }.willReturn(true)
         given { movieDetailsResponse.body() }.willReturn(
-                MovieDetailsEntity(8, "title", String.empty(), String.empty(),
+                com.fernandocejas.sample.data.service.MovieDetailsEntity(8, "title", String.empty(), String.empty(),
                         String.empty(), String.empty(), 0, String.empty()))
         given { movieDetailsResponse.isSuccessful }.willReturn(true)
         given { movieDetailsCall.execute() }.willReturn(movieDetailsResponse)
@@ -162,7 +155,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movieDetails = networkRepository.movieDetails(1)
 
-        movieDetails shouldEqual Right(MovieDetails(8, "title", String.empty(), String.empty(),
+        movieDetails shouldEqual Right(com.fernandocejas.sample.domain.MovieDetails(8, "title", String.empty(), String.empty(),
                 String.empty(), String.empty(), 0, String.empty()))
         verify(service).movieDetails(1)
     }
@@ -173,7 +166,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movieDetails = networkRepository.movieDetails(1)
 
-        movieDetails shouldBeInstanceOf Either::class.java
+        movieDetails shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movieDetails.isLeft shouldEqual true
         movieDetails.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
@@ -185,7 +178,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movieDetails = networkRepository.movieDetails(1)
 
-        movieDetails shouldBeInstanceOf Either::class.java
+        movieDetails shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movieDetails.isLeft shouldEqual true
         movieDetails.either({ failure -> failure shouldBeInstanceOf NetworkConnection::class.java }, {})
         verifyZeroInteractions(service)
@@ -197,7 +190,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movieDetails = networkRepository.movieDetails(1)
 
-        movieDetails shouldBeInstanceOf Either::class.java
+        movieDetails shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movieDetails.isLeft shouldEqual true
         movieDetails.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }
@@ -208,7 +201,7 @@ class MoviesRepositoryTest : UnitTest() {
 
         val movieDetails = networkRepository.movieDetails(1)
 
-        movieDetails shouldBeInstanceOf Either::class.java
+        movieDetails shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         movieDetails.isLeft shouldEqual true
         movieDetails.either({ failure -> failure shouldBeInstanceOf ServerError::class.java }, {})
     }

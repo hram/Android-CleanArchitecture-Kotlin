@@ -39,7 +39,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     </activity>
 
     <activity
-        android:name=".presentation.features.movies.details.MovieDetailsActivity"
+        android:name=".presentation.MovieDetailsActivity"
         android:label="@string/movie_details_screen_title"
         android:theme="@style/AppTheme.Translucent">
     </activity>

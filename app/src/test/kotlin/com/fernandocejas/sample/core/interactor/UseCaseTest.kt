@@ -38,10 +38,10 @@ class UseCaseTest : AndroidTest() {
     }
 
     @Test fun `should return correct data when executing use case`() {
-        var result: Either<Failure, MyType>? = null
+        var result: com.fernandocejas.sample.core.functional.Either<com.fernandocejas.sample.core.exception.Failure, MyType>? = null
 
         val params = MyParams("TestParam")
-        val onResult = { myResult: Either<Failure, MyType> -> result = myResult }
+        val onResult = { myResult: com.fernandocejas.sample.core.functional.Either<com.fernandocejas.sample.core.exception.Failure, MyType> -> result = myResult }
 
         runBlocking { useCase(params, onResult) }
 
@@ -51,7 +51,7 @@ class UseCaseTest : AndroidTest() {
     data class MyType(val name: String)
     data class MyParams(val name: String)
 
-    private inner class MyUseCase : UseCase<MyType, MyParams>() {
+    private inner class MyUseCase : com.fernandocejas.sample.core.interactor.UseCase<MyType, MyParams>() {
         override suspend fun run(params: MyParams) = Right(MyType(TYPE_TEST))
     }
 }

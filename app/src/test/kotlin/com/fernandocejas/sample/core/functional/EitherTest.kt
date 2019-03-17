@@ -28,7 +28,7 @@ class EitherTest : UnitTest() {
     @Test fun `Either Right should return correct type`() {
         val result = Right("ironman")
 
-        result shouldBeInstanceOf Either::class.java
+        result shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         result.isRight shouldBe true
         result.isLeft shouldBe false
         result.either({},
@@ -41,7 +41,7 @@ class EitherTest : UnitTest() {
     @Test fun `Either Left should return correct type`() {
         val result = Left("ironman")
 
-        result shouldBeInstanceOf Either::class.java
+        result shouldBeInstanceOf com.fernandocejas.sample.core.functional.Either::class.java
         result.isLeft shouldBe true
         result.isRight shouldBe false
         result.either(

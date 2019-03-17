@@ -21,7 +21,6 @@ import android.view.ViewGroup
 import com.fernandocejas.sample.R
 import com.fernandocejas.sample.core.extension.inflate
 import com.fernandocejas.sample.core.extension.loadFromUrl
-import com.fernandocejas.sample.core.navigation.Navigator
 import kotlinx.android.synthetic.main.row_movie.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -29,11 +28,11 @@ import kotlin.properties.Delegates
 class MoviesAdapter
 @Inject constructor() : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
-    internal var collection: List<MovieView> by Delegates.observable(emptyList()) {
+    internal var collection: List<com.fernandocejas.sample.presentation.MovieView> by Delegates.observable(emptyList()) {
         _, _, _ -> notifyDataSetChanged()
     }
 
-    internal var clickListener: (MovieView, Navigator.Extras) -> Unit = { _, _ -> }
+    internal var clickListener: (com.fernandocejas.sample.presentation.MovieView, com.fernandocejas.sample.core.navigation.NavigatorImpl.Extras) -> Unit = { _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(parent.inflate(R.layout.row_movie))
@@ -44,9 +43,9 @@ class MoviesAdapter
     override fun getItemCount() = collection.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(movieView: MovieView, clickListener: (MovieView, Navigator.Extras) -> Unit) {
+        fun bind(movieView: com.fernandocejas.sample.presentation.MovieView, clickListener: (com.fernandocejas.sample.presentation.MovieView, com.fernandocejas.sample.core.navigation.NavigatorImpl.Extras) -> Unit) {
             itemView.moviePoster.loadFromUrl(movieView.poster)
-            itemView.setOnClickListener { clickListener(movieView, Navigator.Extras(itemView.moviePoster)) }
+            itemView.setOnClickListener { clickListener(movieView, com.fernandocejas.sample.core.navigation.NavigatorImpl.Extras(itemView.moviePoster)) }
         }
     }
 }

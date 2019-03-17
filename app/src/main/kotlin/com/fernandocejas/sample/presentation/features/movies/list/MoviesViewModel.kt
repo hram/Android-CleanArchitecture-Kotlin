@@ -17,19 +17,17 @@ package com.fernandocejas.sample.presentation.features.movies.list
 
 import android.arch.lifecycle.MutableLiveData
 import com.fernandocejas.sample.core.interactor.UseCase.None
-import com.fernandocejas.sample.core.platform.BaseViewModel
-import com.fernandocejas.sample.domain.GetMovies
-import com.fernandocejas.sample.domain.Movie
+import com.fernandocejas.sample.presentation.BaseViewModel
 import javax.inject.Inject
 
 class MoviesViewModel
-@Inject constructor(private val getMovies: GetMovies) : BaseViewModel() {
+@Inject constructor(private val getMovies: com.fernandocejas.sample.domain.GetMovies) : BaseViewModel() {
 
-    var movies: MutableLiveData<List<MovieView>> = MutableLiveData()
+    var movies: MutableLiveData<List<com.fernandocejas.sample.presentation.MovieView>> = MutableLiveData()
 
     fun loadMovies() = getMovies(None()) { it.either(::handleFailure, ::handleMovieList) }
 
-    private fun handleMovieList(movies: List<Movie>) {
-        this.movies.value = movies.map { MovieView(it.id, it.poster) }
+    private fun handleMovieList(movies: List<com.fernandocejas.sample.domain.Movie>) {
+        this.movies.value = movies.map { com.fernandocejas.sample.presentation.MovieView(it.id, it.poster) }
     }
 }

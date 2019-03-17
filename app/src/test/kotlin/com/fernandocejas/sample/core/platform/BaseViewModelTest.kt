@@ -17,8 +17,8 @@ package com.fernandocejas.sample.core.platform
 
 import android.arch.lifecycle.MutableLiveData
 import com.fernandocejas.sample.AndroidTest
-import com.fernandocejas.sample.core.exception.Failure
 import com.fernandocejas.sample.core.exception.Failure.NetworkConnection
+import com.fernandocejas.sample.presentation.BaseViewModel
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
 
@@ -37,6 +37,6 @@ class BaseViewModelTest : AndroidTest() {
     }
 
     private class MyViewModel : BaseViewModel() {
-        fun handleError(failure: Failure) = handleFailure(failure)
+        fun handleError(failure: com.fernandocejas.sample.core.exception.Failure) = handleFailure(failure)
     }
 }

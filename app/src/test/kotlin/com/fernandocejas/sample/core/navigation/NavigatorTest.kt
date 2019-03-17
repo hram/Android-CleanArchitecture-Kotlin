@@ -28,12 +28,12 @@ import org.mockito.Mockito.verify
 
 class NavigatorTest : AndroidTest() {
 
-    private lateinit var navigator: Navigator
+    private lateinit var navigator: com.fernandocejas.sample.core.navigation.NavigatorImpl
 
     @Mock private lateinit var authenticator: Authenticator
 
     @Before fun setup() {
-        navigator = Navigator(authenticator)
+        navigator = com.fernandocejas.sample.core.navigation.NavigatorImpl(authenticator)
     }
 
     @Test fun `should forward user to login screen`() {
@@ -42,7 +42,7 @@ class NavigatorTest : AndroidTest() {
         navigator.showMain(activityContext())
 
         verify(authenticator).userLoggedIn()
-        RouteActivity::class shouldNavigateTo LoginActivity::class
+        com.fernandocejas.sample.core.navigation.RouteActivity::class shouldNavigateTo LoginActivity::class
     }
 
     @Test fun `should forward user to movies screen`() {
@@ -51,6 +51,6 @@ class NavigatorTest : AndroidTest() {
         navigator.showMain(activityContext())
 
         verify(authenticator).userLoggedIn()
-        RouteActivity::class shouldNavigateTo MoviesActivity::class
+        com.fernandocejas.sample.core.navigation.RouteActivity::class shouldNavigateTo MoviesActivity::class
     }
 }

@@ -16,8 +16,6 @@
 package com.fernandocejas.sample.features.movies
 
 import com.fernandocejas.sample.AndroidTest
-import com.fernandocejas.sample.core.navigation.Navigator
-import com.fernandocejas.sample.domain.PlayMovie
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
@@ -27,18 +25,18 @@ class PlayMovieTest : AndroidTest() {
 
     private val VIDEO_URL = "https://www.youtube.com/watch?v=fernando"
 
-    private lateinit var playMovie: PlayMovie
+    private lateinit var playMovie: com.fernandocejas.sample.domain.PlayMovie
 
     private val context = context()
 
-    @Mock private lateinit var navigator: Navigator
+    @Mock private lateinit var navigator: com.fernandocejas.sample.core.navigation.NavigatorImpl
 
     @Before fun setUp() {
-        playMovie = PlayMovie(context, navigator)
+        playMovie = com.fernandocejas.sample.domain.PlayMovie(context, navigator)
     }
 
     @Test fun `should play movie trailer`() {
-        val params = PlayMovie.Params(VIDEO_URL)
+        val params = com.fernandocejas.sample.domain.PlayMovie.Params(VIDEO_URL)
 
         playMovie(params)
 

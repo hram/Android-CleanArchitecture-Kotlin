@@ -34,7 +34,7 @@ class MoviesViewModelTest : AndroidTest() {
     private lateinit var moviesViewModel: MoviesViewModel
 
     @Mock
-    private lateinit var getMovies: GetMovies
+    private lateinit var getMovies: com.fernandocejas.sample.domain.GetMovies
 
     @Before
     fun setUp() {
@@ -43,7 +43,7 @@ class MoviesViewModelTest : AndroidTest() {
 
     @Test
     fun `loading movies should update live data`() {
-        val moviesList = listOf(Movie(0, "IronMan"), Movie(1, "Batman"))
+        val moviesList = listOf(com.fernandocejas.sample.domain.Movie(0, "IronMan"), com.fernandocejas.sample.domain.Movie(1, "Batman"))
         given { runBlocking { getMovies.run(eq(any())) } }.willReturn(Right(moviesList))
 
         moviesViewModel.movies.observeForever {

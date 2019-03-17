@@ -20,33 +20,32 @@ import com.fernandocejas.sample.core.functional.Either.Right
 import com.fernandocejas.sample.domain.GetMovieDetails
 import com.fernandocejas.sample.domain.MovieDetails
 import com.fernandocejas.sample.domain.PlayMovie
-import com.fernandocejas.sample.presentation.features.movies.details.MovieDetailsViewModel
+import com.fernandocejas.sample.presentation.MovieDetailsViewModel
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.given
 import kotlinx.coroutines.runBlocking
-import org.amshove.kluent.shouldEqualTo
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 
 class MovieDetailsViewModelTest : AndroidTest() {
 
-    private lateinit var movieDetailsViewModel: MovieDetailsViewModel
+    private lateinit var movieDetailsViewModel: com.fernandocejas.sample.presentation.MovieDetailsViewModel
 
     @Mock
-    private lateinit var getMovieDetails: GetMovieDetails
+    private lateinit var getMovieDetails: com.fernandocejas.sample.domain.GetMovieDetails
     @Mock
-    private lateinit var playMovie: PlayMovie
+    private lateinit var playMovie: com.fernandocejas.sample.domain.PlayMovie
 
     @Before
     fun setUp() {
-        movieDetailsViewModel = MovieDetailsViewModel(getMovieDetails, playMovie)
+        movieDetailsViewModel = com.fernandocejas.sample.presentation.MovieDetailsViewModel(getMovieDetails, playMovie)
     }
 
     @Test
     fun `loading movie details should update live data`() {
-        val movieDetails = MovieDetails(0, "IronMan", "poster", "summary",
+        val movieDetails = com.fernandocejas.sample.domain.MovieDetails(0, "IronMan", "poster", "summary",
                 "cast", "director", 2018, "trailer")
         given { runBlocking { getMovieDetails.run(eq(any())) } }.willReturn(Right(movieDetails))
 

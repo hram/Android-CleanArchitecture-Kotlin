@@ -17,7 +17,6 @@ package com.fernandocejas.sample
 
 import android.app.Application
 import com.fernandocejas.sample.core.di.ApplicationComponent
-import com.fernandocejas.sample.core.di.ApplicationModule
 import com.fernandocejas.sample.core.di.DaggerApplicationComponent
 import com.squareup.leakcanary.LeakCanary
 
@@ -26,7 +25,7 @@ class AndroidApplication : Application() {
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerApplicationComponent
                 .builder()
-                .applicationModule(ApplicationModule(this))
+                .applicationModule(com.fernandocejas.sample.core.di.ApplicationModule(this))
                 .build()
     }
 

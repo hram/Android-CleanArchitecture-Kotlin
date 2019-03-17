@@ -31,20 +31,20 @@ import org.mockito.Mock
 
 class GetMoviesTest : UnitTest() {
 
-    private lateinit var getMovies: GetMovies
+    private lateinit var getMovies: com.fernandocejas.sample.domain.GetMovies
 
     @Mock
-    private lateinit var moviesRepository: MoviesRepository
+    private lateinit var moviesRepository: com.fernandocejas.sample.domain.MoviesRepository
 
     @Before
     fun setUp() {
-        getMovies = GetMovies(moviesRepository)
-        given { moviesRepository.movies() }.willReturn(Right(listOf(Movie.empty())))
+        getMovies = com.fernandocejas.sample.domain.GetMovies(moviesRepository)
+        given { moviesRepository.movies() }.willReturn(Right(listOf(com.fernandocejas.sample.domain.Movie.empty())))
     }
 
     @Test
     fun `should get data from repository`() {
-        runBlocking { getMovies.run(UseCase.None()) }
+        runBlocking { getMovies.run(com.fernandocejas.sample.core.interactor.UseCase.None()) }
 
         verify(moviesRepository).movies()
         verifyNoMoreInteractions(moviesRepository)
